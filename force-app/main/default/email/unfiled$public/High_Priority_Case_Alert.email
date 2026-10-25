@@ -1,0 +1,12 @@
+Hello {!Case.OwnerFullName},
+
+A High Priority Case has been assigned to you.
+
+Case Number: {!Case.CaseNumber}
+Subject: {!Case.Subject}
+SLA Due Date: {!Case.SLA_Due_Date__c}
+
+Please address this issue immediately.
+
+Regards,
+Customer Support Team

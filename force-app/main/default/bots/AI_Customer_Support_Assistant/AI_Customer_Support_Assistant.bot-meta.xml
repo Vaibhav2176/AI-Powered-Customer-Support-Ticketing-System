@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <botMlDomain>
+        <label>AI Customer Support Assistant</label>
+        <name>AI_Customer_Support_Assistant</name>
+    </botMlDomain>
+    <contextVariables>
+        <contextVariableMappings>
+            <SObjectType>Case</SObjectType>
+            <fieldName>Case.Id</fieldName>
+            <messageType>Text</messageType>
+        </contextVariableMappings>
+        <dataType>Id</dataType>
+        <developerName>CaseId</developerName>
+        <label>Case ID</label>
+    </contextVariables>
+    <description>You are an AI-powered customer support assistant responsible for analyzing incoming case details, providing initial troubleshooting guidance, suggesting case resolution steps, and categorizing tickets based on issue description.</description>
+    <label>AI Customer Support Assistant</label>
+    <type>InternalCopilot</type>
+</Bot>

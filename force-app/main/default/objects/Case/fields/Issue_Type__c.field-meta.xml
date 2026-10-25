@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_Type__c</fullName>
+    <label>Issue Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Billing</fullName><default>false</default><label>Billing</label></value>
+            <value><fullName>Technical</fullName><default>false</default><label>Technical</label></value>
+            <value><fullName>General Inquiry</fullName><default>false</default><label>General Inquiry</label></value>
+            <value><fullName>Hardware</fullName><default>false</default><label>Hardware</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

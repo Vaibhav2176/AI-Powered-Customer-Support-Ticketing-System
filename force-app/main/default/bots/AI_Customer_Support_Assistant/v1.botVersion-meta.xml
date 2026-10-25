@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BotVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>v1</fullName>
+    <botDialogs>
+        <botSteps>
+            <botMessages><message>Hello! I am the AI Customer Support Assistant for Telecommunications Support. How can I help you triage or resolve a support case today?</message></botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps><type>Wait</type></botSteps>
+        <developerName>Welcome</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Welcome</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <botDialogs>
+        <botSteps>
+            <botMessages><message>I encountered an unexpected issue processing that request. Let me connect you with a support specialist or try another case lookup.</message></botMessages>
+            <type>Message</type>
+        </botSteps>
+        <botSteps><type>Wait</type></botSteps>
+        <developerName>Error_Handling</developerName>
+        <isPlaceholderDialog>false</isPlaceholderDialog>
+        <label>Error Handling</label>
+        <showInFooterMenu>false</showInFooterMenu>
+    </botDialogs>
+    <conversationSystemDialogs><dialog>Error_Handling</dialog><type>ErrorHandling</type></conversationSystemDialogs>
+    <entryDialog>Welcome</entryDialog>
+    <toneType>Casual</toneType>
+</BotVersion>

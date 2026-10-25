@@ -1,0 +1,12 @@
+Hello Support Manager,
+
+The following case is nearing its SLA Due Date:
+
+Case Number: {!Case.CaseNumber}
+Priority: {!Case.Priority}
+SLA Due Date: {!Case.SLA_Due_Date__c}
+
+Please ensure this case is assigned and resolved quickly.
+
+Regards,
+System Automation

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <description>Before-Save (Fast Field Updates) Flow that calculates Resolution_Time__c (4h High, 12h Medium, 24h Low), populates AI_Suggested_Reply__c, and calculates SLA_Due_Date__c without recursive after-save DML. Preserves SLA_Due_Date_Required_For_High_Priority validation when a High Priority Case is submitted without a Support_Category__c or manual SLA_Due_Date__c.</description>
+    <formulas>
+        <name>AI_Suggested_Reply_Formula</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!$Record.AI_Suggested_Reply__c}), "AI Triage Summary [" &amp; TEXT({!$Record.Issue_Type__c}) &amp; " - " &amp; TEXT({!$Record.Priority}) &amp; " Priority]: Thank you for contacting Telecom Customer Support regarding " &amp; {!$Record.Subject} &amp; ". Recommended Resolution Steps: 1) Verify account provisioning and line diagnostics; 2) Apply automated service reset or billing verification per SLA Policy; 3) Confirm service restoration with the customer prior to SLA deadline.", {!$Record.AI_Suggested_Reply__c})</expression>
+    </formulas>
+    <formulas>
+        <name>Resolution_Time_Formula</name>
+        <dataType>Number</dataType>
+        <expression>IF(ISPICKVAL({!$Record.Priority}, "High"), 4, IF(ISPICKVAL({!$Record.Priority}, "Medium"), 12, 24))</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>SLA_Due_Date_Formula</name>
+        <dataType>DateTime</dataType>
+        <expression>IF(NOT(ISBLANK({!$Record.SLA_Due_Date__c})), {!$Record.SLA_Due_Date__c}, IF(AND(ISPICKVAL({!$Record.Priority}, "High"), ISBLANK({!$Record.Support_Category__c})), {!$Record.SLA_Due_Date__c}, {!$Flow.CurrentDateTime} + (IF(ISPICKVAL({!$Record.Priority}, "High"), 4, IF(ISPICKVAL({!$Record.Priority}, "Medium"), 12, 24)) / 24)))</expression>
+    </formulas>
+    <label>Case Before-Save SLA and Triage Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Set_Triage_and_SLA_Fields</name>
+        <label>Set Triage and SLA Fields</label>
+        <locationX>176</locationX>
+        <locationY>287</locationY>
+        <inputAssignments>
+            <field>AI_Suggested_Reply__c</field>
+            <value>
+                <elementReference>AI_Suggested_Reply_Formula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Resolution_Time__c</field>
+            <value>
+                <elementReference>Resolution_Time_Formula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SLA_Due_Date__c</field>
+            <value>
+                <elementReference>SLA_Due_Date_Formula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Triage_and_SLA_Fields</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

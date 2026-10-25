@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SLA_Due_Date_Required_For_High_Priority</fullName>
+    <active>true</active>
+    <description>Ensures SLA Due Date is populated for High priority cases.</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Priority, "High"),
+  ISBLANK(SLA_Due_Date__c)
+)</errorConditionFormula>
+    <errorDisplayField>SLA_Due_Date__c</errorDisplayField>
+    <errorMessage>SLA Due Date must be populated for High priority cases.</errorMessage>
+</ValidationRule>

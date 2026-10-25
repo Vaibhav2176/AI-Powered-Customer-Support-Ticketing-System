@@ -1,0 +1,11 @@
+Hello {!Case.Contact},
+
+Your case has been successfully resolved.
+
+Case Number: {!Case.CaseNumber}
+Status: {!Case.Status}
+
+If you have further questions, feel free to contact us.
+
+Thank you,
+Support Team

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Planner for AI Customer Support Assistant orchestrating Case Triage &amp; Classification and Knowledge &amp; Resolution Suggestion topics.</description>
+    <genAiPlugins><genAiPluginName>Case_Triage_and_Classification</genAiPluginName></genAiPlugins>
+    <genAiPlugins><genAiPluginName>Knowledge_and_Resolution_Suggestion</genAiPluginName></genAiPlugins>
+    <masterLabel>AI Customer Support Assistant Planner</masterLabel>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlanner>

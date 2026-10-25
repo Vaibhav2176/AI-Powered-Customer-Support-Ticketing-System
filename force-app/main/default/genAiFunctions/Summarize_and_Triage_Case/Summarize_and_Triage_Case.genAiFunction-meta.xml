@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Retrieves a telecommunications Case record, classifies the Support Category and Priority tier, and generates a grounded troubleshooting reply based on SLA policies.</description>
+    <invocationTarget>Case_Summary_Flow</invocationTarget>
+    <invocationTargetType>flow</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Summarize and Triage Case</masterLabel>
+</GenAiFunction>

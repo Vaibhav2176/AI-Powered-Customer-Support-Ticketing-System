@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>RowCount</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Total Cases Evaluated</masterLabel>
+        <scale>0</scale>
+    </aggregates>
+    <columns><field>CASE_NUMBER</field></columns>
+    <columns><field>SUBJECT</field></columns>
+    <columns><field>STATUS</field></columns>
+    <columns><field>Case.Issue_Type__c</field></columns>
+    <columns><field>Case.Support_Category__c</field></columns>
+    <columns><field>CREATED_DATE</field></columns>
+    <columns><field>Case.SLA_Due_Date__c</field></columns>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <aggregateTypes>Maximum</aggregateTypes>
+        <field>Case.Resolution_Time__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>AGE</field>
+    </columns>
+    <columns><field>CDF1</field></columns>
+    <columns><field>ACCOUNT.NAME</field></columns>
+    <customDetailFormulas>
+        <calculatedFormula>IF(
+  ISBLANK(Case.SLA_Due_Date__c),
+  "No SLA Target",
+  IF(
+    ISPICKVAL(STATUS, "Closed"),
+    IF(CLOSED_DATE &gt; Case.SLA_Due_Date__c, "SLA Breached", "Within SLA"),
+    IF(NOW() &gt; Case.SLA_Due_Date__c, "SLA Breached (Overdue)", "Within SLA (Active)")
+  )
+)</calculatedFormula>
+        <dataType>Text</dataType>
+        <developerName>CDF1</developerName>
+        <label>SLA Breach Status</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Analyzes SLA breach status (comparing SLA_Due_Date__c against NOW() for open cases and CLOSED_DATE for closed cases) alongside target and actual Resolution_Time__c across Priority tiers.</description>
+    <format>Summary</format>
+    <groupingsDown><dateGranularity>Day</dateGranularity><field>CDF1</field><sortOrder>Asc</sortOrder></groupingsDown>
+    <groupingsDown><dateGranularity>Day</dateGranularity><field>PRIORITY</field><sortOrder>Asc</sortOrder></groupingsDown>
+    <name>SLA Breach &amp; Resolution Time Analysis</name>
+    <params><name>units</name><value>h</value></params>
+    <params><name>co</name><value>1</value></params>
+    <reportType>CaseList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter><dateColumn>CREATED_DATEONLY</dateColumn><interval>INTERVAL_CUSTOM</interval></timeFrameFilter>
+</Report>

@@ -1,0 +1,12 @@
+# Salesforce CLI / local tooling
+.sfdx/
+.sf/
+.localdevserver/
+node_modules/
+coverage/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+*.log
