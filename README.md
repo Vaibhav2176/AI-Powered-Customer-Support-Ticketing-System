@@ -52,7 +52,7 @@ A record-triggered after-save Flow intended to send the configured resolution no
 - **Open Cases by Priority:** groups open Cases by priority.
 - **SLA Breach & Resolution Time Analysis:** includes the `SLA Breach Status` row-level formula (`CDF1`) and SLA/resolution-time analysis.
 
-The formula in the packaged report metadata uses these labels: `No SLA Assigned`, `SLA Breached (Closed Late)`, `SLA Breached (Overdue Open)`, `Within SLA (Met)`, and `Within SLA (Active)`. Report formulas are report-level calculations, not persistent Case fields.
+The formula in the packaged report metadata uses these exact output labels: `No SLA Target`, `SLA Breached`, `Within SLA`, `SLA Breached (Overdue)`, and `Within SLA (Active)`. Report formulas are report-level calculations, not persistent Case fields.
 
 ## Live development-org verification reported
 
@@ -106,7 +106,7 @@ This repository is Salesforce DX source metadata. Deployment has **not** been va
 
 1. Install Salesforce CLI and authenticate to a disposable development/test org.
 2. Confirm that required Salesforce features and Agentforce/Einstein capabilities are enabled in the target org.
-3. Review profile permissions and any org-specific email recipients or settings.
+3. Review profile permissions and org-specific settings. The SLA breach warning alert is configured for the Case owner to avoid a hardcoded development-org user recipient; its email template addresses the Support Team.
 4. Validate the deployment before deploying:
    ```bash
    sf project deploy validate --manifest manifest/package.xml --target-org <your-org-alias>
@@ -118,7 +118,7 @@ Do not use this package as proof of successful deployment until the Salesforce C
 
 ## Package validation status
 
-At the time of preparation, the package was reported to have passed ZIP integrity, XML parsing, manifest cross-reference, and credential scanning checks. Those checks are distinct from Salesforce deployment validation. This refined package adds explicit `CustomField` entries to the manifest and aligns the packaged report formula labels with the report metadata.
+At the time of preparation, the package was reported to have passed ZIP integrity, XML parsing, manifest cross-reference, and credential scanning checks. Those checks are distinct from Salesforce deployment validation. This refined package adds explicit `CustomField` entries to the manifest, aligns the README formula labels with the report metadata, and removes a hardcoded development-org email recipient from the SLA breach warning alert.
 
 ## Security and publishing notes
 
